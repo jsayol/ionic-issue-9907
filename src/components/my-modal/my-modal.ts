@@ -11,17 +11,21 @@ export class MyModalComponent {
               public loadingController: LoadingController) {
   }
 
-  dismiss() {
+  dismiss1() {
     let loading: Loading = this.loadingController.create({
       dismissOnPageChange: true
     });
 
     loading.present().then(() => {
-      // Do some stuff
+      this.viewController.dismiss();
+    });
+  }
 
-      this.viewController.dismiss(() => {
-        // => Modal is now closed but Loading hangs
-      });
+  dismiss2() {
+    let loading: Loading = this.loadingController.create();
+
+    loading.present().then(() => {
+      this.viewController.dismiss().then(() => loading.dismissAll());
     });
   }
 }
